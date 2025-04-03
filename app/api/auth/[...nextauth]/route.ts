@@ -30,7 +30,7 @@ export const authOptions: AuthOptions = {
     })
   ],
   pages: {
-    signIn: "/login",
+    signIn: "/",
   },
   session: {
     strategy: "jwt" as SessionStrategy, // ✅ Fix the Type Error Here

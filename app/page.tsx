@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    await signIn("credentials", { email, password, callbackUrl: "/" });
+    await signIn("credentials", { email, password, callbackUrl: "/user/home" });
   };
 
   return (
@@ -21,7 +21,9 @@ export default function LoginPage() {
           <Image src={LoginImage} alt="Login Robot Image" />
         </div>
         <div className="  flex flex-col w-2xl justify-center  space-y-3">
-        <span className=" flex justify-center items-center text-3xl font-bold">Login</span>
+          <span className=" flex justify-center items-center text-3xl font-bold">
+            Login
+          </span>
           <input
             className=" bg-white/20 rounded-3xl p-3"
             type="email"
@@ -34,20 +36,19 @@ export default function LoginPage() {
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div className=" flex justify-between gap-2">
-            <button
-              className="p-3 bg-white/20 rounded-3xl hover:bg-green-500 duration-300 cursor-pointer w-1/2  hover:text-black font-bold"
-              onClick={handleLogin}
-            >
-              Login
-            </button>
-            <Link
-              href="/register"
-              className="p-3 bg-white/20 rounded-3xl hover:bg-black duration-300 cursor-pointer w-1/2 font-bold flex justify-center"
-            >
+
+          <button
+            className="p-3 bg-white/20 rounded-3xl hover:bg-green-500 duration-300 cursor-pointer  hover:text-black font-bold"
+            onClick={handleLogin}
+          >
+            Login
+          </button>
+          <span>
+            Dont't have an account?{" "}
+            <Link href="/register" className=" text-blue-500">
               Register
             </Link>
-          </div>
+          </span>
         </div>
       </div>
     </div>
