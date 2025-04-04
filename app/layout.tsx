@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthProvider, {
   StoreUserInLocalStorage,
 } from "./components/AuthProvider";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Toaster position="top-center" reverseOrder={false} />
         <AuthProvider>
           <StoreUserInLocalStorage />
           {children}

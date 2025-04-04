@@ -1,22 +1,19 @@
-"use client";
-import Link from "next/link";
-import React from "react";
+import { getPOroducts } from "@/app/api/products/products";
+import { ProductCard } from "../components/product-cart";
 
-const page = () => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  console.log(user.id);
 
+export default async function Home() {
+  const products = (await getPOroducts()) || [];
   return (
-    <div>
-      Home
-      <p>{user.name}</p>
-      {user?.id && (
-        <Link href={`/user/${user.id}`} className="text-blue-500 underline">
-          Click Here!
-        </Link>
-      )}
+    <div className="min-h-screen bg-gray-100">
+      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Our Products</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </main>
     </div>
   );
-};
-
-export default page;
+}

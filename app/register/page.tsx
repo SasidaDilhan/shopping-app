@@ -5,12 +5,13 @@ import { useState } from "react";
 import RegisterImage from "@/app/assets/register_image.png";
 import Link from "next/link";
 import { useRouter } from "next/navigation"; // Import the useRouter hook
+import Swal from "sweetalert2";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();  // Initialize the router
+  const router = useRouter(); // Initialize the router
 
   const handleRegister = async () => {
     const res = await fetch("/api/auth/register", {
@@ -21,22 +22,33 @@ export default function RegisterPage() {
 
     const data = await res.json();
 
-    if (res.ok) { // Check if the registration was successful (status code 200-299)
-      alert(data.message || "Registration successful!");
+    if (res.ok) {
+      // Check if the registration was successful (status code 200-299)
+      // alert(data.message || "Registration successful!");
+      Swal.fire({
+        title: "Registration successful!",
+        text: data.message,
+        icon: "success",
+      });
       router.push("/"); // Redirect to the login page
     } else {
       alert(data.error || "Registration failed."); //Display error message
+      Swal.fire({
+        title: "Registration successful!",
+        text: data.error,
+        icon: "error",
+      });
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen w-full">
-      <div className=" flex justify-center  w-5xl m-auto">
-        <div>
+    <div className="flex justify-center items-center  h-screen w-full">
+      <div className=" flex justify-center  w-5xl m-auto ">
+        <div className=" hidden md:flex">
           <Image src={RegisterImage} alt="Register Blog Image" />
         </div>
 
-        <div className="flex flex-col w-2xl justify-center  space-y-3">
+        <div className="flex flex-col w-[400px] p-2 md:w-2xl justify-center  space-y-3">
           <span className=" flex justify-center items-center text-3xl font-bold">
             Register
           </span>
