@@ -22,7 +22,7 @@ const user = {
   avatar: "/user.png?height=32&width=32",
 };
 
-export function SiteHeader() {
+export function NavBar() {
   const isLoggedIn = false;
 
   const items = useCartStore((state) => state.items);
